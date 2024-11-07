@@ -8,6 +8,9 @@ class Viaje {
   method cuantosDias()
 
   method esInteresante() = idiomas.size() > 1
+
+  method esRecomendadaPara(unSocio) = 
+    self.esInteresante() and unSocio.leAtrae(self) and not unSocio.actividadesRealizadas().contains(self)
 }
 
 class ViajeDePlaya inherits Viaje{
@@ -17,7 +20,7 @@ class ViajeDePlaya inherits Viaje{
 
   override method sirveParaBroncearse() = true
 
-  override method cuantosDias() = (largoDePlaya / 500).roundUp()
+  override method cuantosDias() = largoDePlaya / 500
 }
 
 class ExcursionALaCiudad inherits Viaje {
@@ -27,7 +30,7 @@ class ExcursionALaCiudad inherits Viaje {
 
   override method sirveParaBroncearse() = false
 
-  override method cuantosDias() = (cantAtracciones * 0.5).roundUp()
+  override method cuantosDias() = cantAtracciones * 0.5
 
   override method esInteresante() = super() or cantAtracciones == 5
 }
@@ -50,14 +53,21 @@ class SalidaDeTrekking inherits Viaje {
 
   override method cuantosDias() = cantKmSenderos / 50
 
-  override method esInteresante() = super() and cantDiasDeSolDelLugar > 150
+  override method esInteresante() = super() and cantDiasDeSolDelLugar > 140
 }
 
-class ClaseDeGimnasia inherits Viaje (idiomas = ["español"]) {
+class ClaseDeGimnasia inherits Viaje () {
+
+  method initialize(){
+    idiomas.clear()
+    idiomas.add("español")
+  }
 
   override method implicaEsfuerzo() = true
 
   override method sirveParaBroncearse() = false
 
   override method cuantosDias() = 1
+
+  override method esRecomendadaPara(unSocio) = unSocio.edad().between(20, 30)
 }
