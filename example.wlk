@@ -1,3 +1,3 @@
 object pepita {
-
+  var prueba = ""
 }
