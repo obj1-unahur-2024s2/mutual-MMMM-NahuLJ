@@ -116,22 +116,29 @@ describe "group of tests for PARTE 2" {
   }
 }
 
-describe "group of tests for PARTE 3" {
+describe "group of tests for PARTE 4" {
   const viajeDePlaya1 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 2000)
   const viajeDePlaya2 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 1000)
   
+  const claseDeGimnasia = new ClaseDeGimnasia()
+  
   const roque = new Socio (actividadesRealizadas = [viajeDePlaya1, viajeDePlaya2], maximoDeActividades = 2)
+  const ana = new Socio (actividadesRealizadas = [viajeDePlaya1, viajeDePlaya2], maximoDeActividades = 3)
   test "roque es adorador del sol" {
-    assert.that(roque.esAdoradorDelSol())
+    assert.that(roque.adoraElSol())
   }
 
   test "si le preguntamos a roque laas actividades esforzadas, solo son el viaje de playa1" {
     assert.equals([viajeDePlaya1], roque.actividadesEsforzadas())
   }
 
-  /*
   test "si le intentamos registrar una actividad a roque, lanza un error" {
-    assert.throwsException({roque.registrarActividad(viajeDePlaya1)})
+    assert.throwsExceptionWithType(new DomainException(), {roque.registrarActividad(viajeDePlaya2)})
   }
-  */
+
+  test "si a ana le intentamos agregar una clase de gimnasia, no hay problema, y ya no adora el sol" {
+    ana.registrarActividad(claseDeGimnasia)
+    assert.equals([viajeDePlaya1, viajeDePlaya2, claseDeGimnasia], ana.actividadesRealizadas())
+    assert.notThat(ana.adoraElSol())
+  }
 }

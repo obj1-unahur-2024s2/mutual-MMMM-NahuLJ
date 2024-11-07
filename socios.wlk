@@ -1,14 +1,14 @@
 import viajes.*
 class Socio {
-  const actividadesRealizadas 
+  const property actividadesRealizadas 
   const maximoDeActividades
 
-  method esAdoradorDelSol() = actividadesRealizadas.all({act => act.sirveParaBroncearse()})
+  method adoraElSol() = actividadesRealizadas.all({act => act.sirveParaBroncearse()})
 
   method actividadesEsforzadas() = actividadesRealizadas.filter({act => act.implicaEsfuerzo()})
 
   method registrarActividad(unaActividad){
-    if (maximoDeActividades == actividadesRealizadas.size() + 1){
+    if (maximoDeActividades == actividadesRealizadas.size()){
       self.error("Se llego al limite de actividades")
     }
     actividadesRealizadas.add(unaActividad)

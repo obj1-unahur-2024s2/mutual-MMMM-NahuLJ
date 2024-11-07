@@ -53,7 +53,7 @@ class SalidaDeTrekking inherits Viaje {
   override method esInteresante() = super() and cantDiasDeSolDelLugar > 150
 }
 
-class ClasesDeGimnasia inherits Viaje (idiomas = ["español"]) {
+class ClaseDeGimnasia inherits Viaje (idiomas = ["español"]) {
 
   override method implicaEsfuerzo() = true
 
