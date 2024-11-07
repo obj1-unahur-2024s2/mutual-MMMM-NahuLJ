@@ -3,7 +3,7 @@ class Socio {
   const property actividadesRealizadas = #{}
   const maximoDeActividades
   var edad
-  const idiomasQueHabla 
+  const property idiomasQueHabla 
 
   method adoraElSol() = actividadesRealizadas.all({act => act.sirveParaBroncearse()})
 

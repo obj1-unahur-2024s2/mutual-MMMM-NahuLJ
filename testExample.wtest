@@ -178,3 +178,57 @@ describe "group of tests for PARTE 3,4 y 5" {
     assert.that(claseDeGimnasia.esRecomendadaPara(john)) 
   }
 }
+
+describe "group of tests for BONUS Taller Literario" {
+  const viajeDePlaya1 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 2000)
+  const viajeDePlaya2 = new ViajeDePlaya (idiomas = ["español"], largoDePlaya = 1000)
+  
+  const roque = new SocioTranquilo (actividadesRealizadas = #{viajeDePlaya1, viajeDePlaya2}, maximoDeActividades = 2,
+    edad = 23, idiomasQueHabla = ["español", "frances"])
+  const ana = new SocioCoherente (actividadesRealizadas = #{viajeDePlaya2}, maximoDeActividades = 3,
+    edad = 31, idiomasQueHabla = ["guarani"])
+  const john = new SocioRelajado (actividadesRealizadas = #{viajeDePlaya1, viajeDePlaya2}, maximoDeActividades = 3,
+    edad = 20, idiomasQueHabla = ["guarani","ingles"])
+
+  const taller = new TallerLiterario(libros = [libro1,libro2,libro3])
+
+  const libro1 = new Libro(idioma = "español", cantPaginas = 300, nombreAutor = "ruperto benavidez")
+  const libro2 = new Libro(idioma = "ingles", cantPaginas = 200, nombreAutor = "ruperto benavidez")
+  const libro3 = new Libro(idioma = "español", cantPaginas = 120, nombreAutor = "ruperto benavidez")
+  const libro4 = new Libro(idioma = "guarani", cantPaginas = 600, nombreAutor = "ezequiel martinez")
+  const libro5 = new Libro(idioma = "guarani", cantPaginas = 100, nombreAutor = "brandon joggins")
+  test "los idiomas del taller son español e ingles" {
+    assert.equals(["español","ingles"],taller.idiomas())
+  }
+
+  test "si le agregamos el libro4 al taller, sus idiomas son español, ingles y guarani" {
+    taller.libros().add(libro4)
+    assert.equals(["español","ingles","guarani"],taller.idiomas())
+  }
+
+  test "el taller tiene una duracion de 4 dias, no sirve para broncearse y implica esfuerzo" {
+    assert.equals(4,taller.cuantosDias())
+    assert.that(taller.implicaEsfuerzo())
+    assert.notThat(taller.sirveParaBroncearse())
+  }
+
+  test "si al taller le agregamos el libro4 tiene una duracion de 5 dias, no sirve para broncearse y implica esfuerzo" {
+    taller.libros().add(libro4)
+    assert.equals(5,taller.cuantosDias())
+    assert.that(taller.implicaEsfuerzo())
+    assert.notThat(taller.sirveParaBroncearse())
+  }
+
+  test "si al taller le agregamos el libro5 tiene una duracion de 5 dias, no sirve para broncearse y no implica esfuerzo" {
+    taller.libros().add(libro5)
+    assert.equals(5,taller.cuantosDias())
+    assert.notThat(taller.implicaEsfuerzo())
+    assert.notThat(taller.sirveParaBroncearse())
+  }
+
+  test "el taller es una actividad recomendada para roque y john pero no para ana" {
+    assert.that(taller.esRecomendadaPara(roque))
+    assert.that(taller.esRecomendadaPara(john))
+    assert.notThat(taller.esRecomendadaPara(ana))
+  }
+}
