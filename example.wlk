@@ -1,3 +1,0 @@
-object pepita {
-  var prueba = ""
-}

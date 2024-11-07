@@ -1,9 +1,137 @@
-import example.*
+import viajes.*
+import socios.*
 
-describe "group of tests for pepita" {
+describe "group of tests for PARTE 1" {
+  //Viajes de playa
+  const viajeDePlaya1 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 2000)
+  const viajeDePlaya2 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 800)
 
-  test "pepita has initial energy" {
-    assert.equals(100, 100)
+  //Viajes de excursion
+  const excursionCiudad1 = new ExcursionALaCiudad (idiomas = ["portugues"], cantAtracciones = 4)
+  const excursionTropical1 = new ExcursionACiudadTropical (idiomas = ["español"], cantAtracciones = 4)
+  const excursionCiudad2 = new ExcursionALaCiudad (idiomas = ["portugues"], cantAtracciones = 8)
+  const excursionTropical2 = new ExcursionACiudadTropical (idiomas = ["español"], cantAtracciones = 8)
+  const excursionTropical3 = new ExcursionACiudadTropical (idiomas = ["español"], cantAtracciones = 10)
+  
+  //Salidas de trekking
+  const salidaTrekking1 = new SalidaDeTrekking (idiomas = ["tailandes"], 
+    cantKmSenderos = 100, cantDiasDeSolDelLugar = 130)
+  const salidaTrekking2 = new SalidaDeTrekking (idiomas = ["tailandes"], 
+    cantKmSenderos = 50, cantDiasDeSolDelLugar = 240)
+  const salidaTrekking3 = new SalidaDeTrekking (idiomas = ["tailandes"], 
+    cantKmSenderos = 250, cantDiasDeSolDelLugar = 130)
+
+  test "el viaje de playa 1, implica esfuerzo, sirve para broncearse y dura 4 dias" {
+    assert.that(viajeDePlaya1.implicaEsfuerzo())
+    assert.that(viajeDePlaya1.sirveParaBroncearse())
+    assert.equals(4, viajeDePlaya1.cuantosDias())
   }
 
+  test "el viaje de playa 2, no implica esfuerzo, sirve para broncearse y dura 2 dias" {
+    assert.notThat(viajeDePlaya2.implicaEsfuerzo())
+    assert.that(viajeDePlaya2.sirveParaBroncearse())
+    assert.equals(2, viajeDePlaya2.cuantosDias())
+  }
+
+  test "la excursionCiudad1 lleva 2 dias, no implica esfuerzo y no sirve para broncearse" {
+    assert.equals(2, excursionCiudad1.cuantosDias())
+    assert.notThat(excursionCiudad1.implicaEsfuerzo())
+    assert.notThat(excursionCiudad1.sirveParaBroncearse())
+  }
+
+  test "la excursionTropical1 lleva 3 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.equals(3, excursionTropical1.cuantosDias())
+    assert.notThat(excursionTropical1.implicaEsfuerzo())
+    assert.that(excursionTropical1.sirveParaBroncearse())
+  }
+
+  test "la excursionCiudad2 lleva 4 dias, implica esfuerzo y no sirve para broncearse" {
+    assert.equals(4, excursionCiudad2.cuantosDias())
+    assert.that(excursionCiudad2.implicaEsfuerzo())
+    assert.notThat(excursionCiudad2.sirveParaBroncearse())
+  }
+
+  test "la excursionTropical2 lleva 5 dias, implica esfuerzo y sirve para broncearse" {
+    assert.equals(5, excursionTropical2.cuantosDias())
+    assert.that(excursionTropical2.implicaEsfuerzo())
+    assert.that(excursionTropical2.sirveParaBroncearse())
+  }
+
+  test "la excursionTropical3 lleva 6 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.equals(6, excursionTropical3.cuantosDias())
+    assert.notThat(excursionTropical3.implicaEsfuerzo())
+    assert.that(excursionTropical3.sirveParaBroncearse())
+  }
+
+  test "la salidaTrekking1 lleva 2 dias, implica esfuerzo y no sirve para broncearse" {
+    assert.equals(2, salidaTrekking1.cuantosDias())
+    assert.that(salidaTrekking1.implicaEsfuerzo())
+    assert.notThat(salidaTrekking1.sirveParaBroncearse())
+  }
+
+  test "la salidaTrekking2 lleva 1 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.equals(1, salidaTrekking2.cuantosDias())
+    assert.notThat(salidaTrekking2.implicaEsfuerzo())
+    assert.that(salidaTrekking2.sirveParaBroncearse())
+  }
+
+  test "la salidaTrekking3 lleva 5 dias, implica esfuerzo y sirve para broncearse" {
+    assert.equals(5, salidaTrekking3.cuantosDias())
+    assert.that(salidaTrekking3.implicaEsfuerzo())
+    assert.that(salidaTrekking3.sirveParaBroncearse())
+  }
+}
+
+describe "group of tests for PARTE 2" {
+    //Viajes de playa
+  const viajeDePlaya1 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 2000)
+
+  //Viajes de excursion
+  const excursionCiudad1 = new ExcursionALaCiudad (idiomas = ["portugues"], cantAtracciones = 5)
+  const excursionTropical1 = new ExcursionACiudadTropical (idiomas = ["español"], cantAtracciones = 4)
+  //Salidas de trekking
+  const salidaTrekking1 = new SalidaDeTrekking (idiomas = ["tailandes"], 
+    cantKmSenderos = 100, cantDiasDeSolDelLugar = 130)
+  const salidaTrekking2 = new SalidaDeTrekking (idiomas = ["tailandes","japones"], 
+    cantKmSenderos = 50, cantDiasDeSolDelLugar = 240)
+  
+  test "el viajeDePlaya1 es interesante" {
+    assert.that(viajeDePlaya1.esInteresante())
+  }
+
+  test "la excursionCiudad1 es interesante" {
+    assert.that(excursionCiudad1.esInteresante())
+  }
+  
+  test "la excursionTropical1 no es interesante" {
+    assert.notThat(excursionTropical1.esInteresante())
+  }
+
+  test "la salidaDeTreking1 no es interesante" {
+    assert.notThat(salidaTrekking1.esInteresante())
+  }
+
+  test "la salidaTrekking2 es interesante" {
+    assert.that(salidaTrekking2.esInteresante())
+  }
+}
+
+describe "group of tests for PARTE 3" {
+  const viajeDePlaya1 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 2000)
+  const viajeDePlaya2 = new ViajeDePlaya (idiomas = ["español", "ingles"], largoDePlaya = 1000)
+  
+  const roque = new Socio (actividadesRealizadas = [viajeDePlaya1, viajeDePlaya2], maximoDeActividades = 2)
+  test "roque es adorador del sol" {
+    assert.that(roque.esAdoradorDelSol())
+  }
+
+  test "si le preguntamos a roque laas actividades esforzadas, solo son el viaje de playa1" {
+    assert.equals([viajeDePlaya1], roque.actividadesEsforzadas())
+  }
+
+  /*
+  test "si le intentamos registrar una actividad a roque, lanza un error" {
+    assert.throwsException({roque.registrarActividad(viajeDePlaya1)})
+  }
+  */
 }
